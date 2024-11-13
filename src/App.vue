@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import Home from './views/Home/Home.vue'
 </script>
 
 <template>
-  <Home msg="Vite + Vue" />
+  <div class="app">
+    <router-view />
+  </div>
 </template>
 
 <style>
@@ -25,5 +26,10 @@ canvas {
   top: 0;
   width: 100vw;
   height: 100vh;
+}
+.app {
+  width: 100vw;
+  height: 100vh;
+  transform-origin: 0 0;
 }
 </style>
