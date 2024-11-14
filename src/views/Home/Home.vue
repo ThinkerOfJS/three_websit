@@ -87,8 +87,6 @@ onMounted(() => {
   let loader = new GLTFLoader();
   loader.setDRACOLoader(dracoLoader);
   loader.load("./model/xz.glb", (gltf) => {
-    console.log(gltf);
-    
     gltf.scene.scale.set(0.1, 0.1, 0.1);
     gltf.scene.position.set(3, 0, 0);
     scene.add(gltf.scene);
@@ -107,8 +105,6 @@ onMounted(() => {
   });
 
   loader.load("./model/xq6.glb", (gltf) => {
-    console.log(gltf);
-    
     gltf.scene.scale.set(0.05, 0.05, 0.05);
     gltf.scene.position.set(3, -8, 0);
     scene.add(gltf.scene);
@@ -127,8 +123,6 @@ onMounted(() => {
   });
 
   loader.load("./model/gr75.glb", (gltf) => {
-    console.log(gltf);
-    
     gltf.scene.position.set(3, -16, 0);
     scene.add(gltf.scene);
 
