@@ -1,4 +1,4 @@
-import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
+import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
 import Layout from '../layout/index.vue';
 
 import Websit from '../views/Websit/Websit.vue';
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
