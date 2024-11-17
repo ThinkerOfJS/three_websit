@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -13,7 +13,12 @@ onMounted(() => {
 const scene = new THREE.Scene();
 
 // 创建一个相机
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
 
 // 创建一个渲染器
 const renderer = new THREE.WebGLRenderer();
@@ -27,39 +32,25 @@ dracoLoader.setDecoderConfig({ type: "js" });
 const loaderGltf = new GLTFLoader();
 loaderGltf.setDRACOLoader(dracoLoader);
 loaderGltf.load("./model/girls_01.glb", (gltf) => {
-  console.log(gltf);
-  
-  // gltf.scene.scale.set(0.1, 0.1, 0.1);
-  gltf.scene.position.set(3, 0, 0);
+  gltf.scene.position.set(0, 0, 0);
   scene.add(gltf.scene);
 });
-
-
-// const controls = new OrbitControls(camera, renderer.domElement);
 
 // 创建一个PMREMGenerator以生成环境贴图
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 pmremGenerator.compileEquirectangularShader();
 
 // 使用EXRLoader加载exr图片
-const loader = new EXRLoader();
-loader.load('./textures/rogland_clear_night_4k.exr', function (texture) {
-    // 通过PMREMGenerator处理texture生成环境贴图
-    const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-    // 设置场景的环境贴图
-    scene.environment = envMap;
-    // 设置场景的背景
+const rgbeLoader = new RGBELoader();
+rgbeLoader.load('./textures/enviroment.hdr', function (envMap) {
+    // hdr作为环境贴图生效，设置.mapping为EquirectangularReflectionMapping
+    envMap.mapping = THREE.EquirectangularReflectionMapping;
     scene.background = envMap;
-    // 释放pmremGenerator的资源
-    pmremGenerator.dispose();
-});
+    scene.environment = envMap;
+})
 
 // 设置相机位置
-camera.position.z = 10;
-
-// 添加世界坐标辅助器
-// const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
+camera.position.z = 15;
 
 // 添加轨道控制器
 const controls = new OrbitControls(camera, document.body);
