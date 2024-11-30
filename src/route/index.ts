@@ -1,8 +1,9 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
 import Layout from '../layout/index.vue';
 
-import Websit from '../views/Websit/Websit.vue';
-import Test from '../views/Test/Test.vue';
+import Websit from '../module/Websit/Websit.vue';
+import Girl from '../module/Girl/Girl.vue';
+import Fox from '../module/Fox/Fox.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -17,9 +18,14 @@ const routes: RouteRecordRaw[] = [
         component: Websit,
       },
       {
-        path: 'test',
-        name: 'Test',
-        component: Test,
+        path: 'girl',
+        name: 'Girl',
+        component: Girl,
+      },
+      {
+        path: 'fox',
+        name: 'Fox',
+        component: Fox,
       },
     ]
   },

@@ -11,8 +11,12 @@ const routesData: Route[] = reactive([
       route: '/websit',
   },
   {
-      name: '3d',
-      route: '/test',
+      name: '珍珠女孩',
+      route: '/girl',
+  },
+  {
+      name: '狐狸',
+      route: '/fox',
   },
   {
       name: '我的',
